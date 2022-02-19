@@ -54,15 +54,23 @@ class VerticaCursor():
             if name != 'execute':
                 return attr(*args, **kwargs)
 
+            if "locust_name" in kwargs:
+                request_name = kwargs["locust_name"]
+                # vertica-python doesn't like this extra keyword argument
+                del kwargs["locust_name"]
+            else:
+                request_name = "execute"
+
             request_meta = {
                 "request_type": "vertica",
-                "name": "execute",
+                "name": request_name,
                 "start_time": time.time(),
                 "response_length": 0,
                 "response": None,
                 "context": {},
                 "exception": None,
             }
+
             start_perf_counter = time.perf_counter()
             try:
                 if self.carbon_client:

@@ -10,7 +10,7 @@ def readme():
 
 setup(name='vertica_locust_client',
       packages=['vertica_locust_client'],
-      version='0.0.3',
+      version='0.0.6',
       description='A Vertica client for use with the locust.io load testing tool',
       long_description=readme(),
       author='Matt Spilchen',
